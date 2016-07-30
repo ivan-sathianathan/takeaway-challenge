@@ -24,25 +24,26 @@ To run this project, perform the following steps:
 
 1. Clone this repo
 2. Run ```bundle```
-3. 
+3. Initialize a new order object: ```order = Order.new```
+4. Add items to your basket
+```
+2.2.3 :002 > order = Order.new
+ => #<Order:0x007f7fbb416968 @basket={}, @menu=#<Menu:0x007f7fbb416918 @items={"Hamburger"=>1, "Cheeseburger"=>1, "Pizza"=>2, "Hot Dog"=>1}>>  
+```
 
-* Hints on functionality to implement:
-  * ensure you have a list of dishes with prices
-  * place the order by giving the list of dishes, their quantities and a number that should be the exact total. If the sum is not correct the method should raise an error, otherwise the customer is sent a text saying that the order was placed successfully and that it will be delivered 1 hour from now, e.g. "Thank you! Your order was placed and will be delivered before 18:52".
-  * The text sending functionality should be implemented using Twilio API. You'll need to register for it. It’s free.
-  * Use the twilio-ruby gem to access the API
-  * Use a Gemfile to manage your gems
-  * Make sure that your Takeaway is thoroughly tested and that you use mocks and/or stubs, as necessary to not to send texts when your tests are run
-  * However, if your Takeaway is loaded into IRB and the order is placed, the text should actually be sent
+5. Order some items
+```order.add_to_basket("Hamburger", 2)
+2.2.3 :003 > order.add_to_basket("Hamburger",2)
+ => "2 x Hamburger added to your basket"
+```
 
-* Advanced! (have a go if you're feeling adventurous):
-  * Implement the ability to place orders via text message.
+6. Check status of order
+```2.2.3 :004 > order.print_summary
+ => "2 x Hamburger = £2: Total = £2"
+```
 
-* A free account on Twilio will only allow you to send texts to "verified" numbers. Use your mobile phone number, don't worry about the customer's mobile phone.
-* Finally submit a pull request before Monday at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday at 9am
+7. Place order
 
-
-**Note: We are looking for good OO design and programming! Remember the Single Responsibility and Dependency Injection/Inversion principles!**
 
 [![Build Status](https://travis-ci.org/makersacademy/takeaway-challenge.svg?branch=master)](https://travis-ci.org/makersacademy/takeaway-challenge)
 [![Coverage Status](https://coveralls.io/repos/makersacademy/takeaway-challenge/badge.png)](https://coveralls.io/r/makersacademy/takeaway-challenge)
