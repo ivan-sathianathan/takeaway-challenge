@@ -22,15 +22,15 @@ I would like to receive a text such as "Thank you! Your order was placed and wil
 
 To run this project, perform the following steps:
 
-1. Clone this repo
-2. Run ```bundle```
-3. Initialize a new order object:
+- Clone this repo
+- Run ```bundle```
+- Initialize a new order object:
 
 ```
 2.2.3 :002 > order = Order.new
  => #<Order:0x007f7fbb416968 @basket={}, @menu=#<Menu:0x007f7fbb416918 @items={"Hamburger"=>1, "Cheeseburger"=>1, "Pizza"=>2, "Hot Dog"=>1}>>  
 ```
-1. Order some items
+- Order some items
 
 ```
 order.add_to_basket("Hamburger", 2)
@@ -38,13 +38,13 @@ order.add_to_basket("Hamburger", 2)
  => "2 x Hamburger added to your basket"
 ```
 
-5. Check status of order
+- Check status of order
 
 ```2.2.3 :004 > order.print_summary
  => "2 x Hamburger = £2: Total = £2"
 ```
 
-6. Place order
+- Place order
 
 
 [![Build Status](https://travis-ci.org/makersacademy/takeaway-challenge.svg?branch=master)](https://travis-ci.org/makersacademy/takeaway-challenge)
