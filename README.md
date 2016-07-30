@@ -40,7 +40,8 @@ order.add_to_basket("Hamburger", 2)
 
 - Check status of order
 
-```2.2.3 :004 > order.print_summary
+```
+2.2.3 :004 > order.print_summary
  => "2 x Hamburger = £2: Total = £2"
 ```
 
