@@ -1,3 +1,4 @@
+require_relative 'menu'
 require_relative 'sendsms'
 
 class Order

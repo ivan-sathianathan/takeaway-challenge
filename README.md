@@ -1,19 +1,6 @@
-Takeaway Challenge
-==================
+##Takeaway Challenge
 
-Instructions
--------
-* Feel free to use google, your notes, books, etc but work on your own
-* You must submit a pull request to this repo with your code by 9am Monday morning
-
-Task
------
-
-* Fill out your learning plan self review for the week: https://github.com/makersacademy/learning_plan_october2015 (if you haven't already)
-* Fork this repo
-* run the command 'bundle' in the project directory to ensure you have all the gems
-* Write a Takeaway program with the following user stories:
-
+This is my solution to the second weekend challenge we were set at Makers Academy. We had to fulfill the following user stories:
 ```
 As a customer
 So that I can check if I want to order something
@@ -31,6 +18,13 @@ As a customer
 So that I am reassured that my order will be delivered on time
 I would like to receive a text such as "Thank you! Your order was placed and will be delivered before 18:52" after I have ordered
 ```
+##Usage
+
+To run this project, perform the following steps:
+
+1. Clone this repo
+2. Run ```bundle```
+3. 
 
 * Hints on functionality to implement:
   * ensure you have a list of dishes with prices
