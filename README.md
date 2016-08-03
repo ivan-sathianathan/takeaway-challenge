@@ -24,11 +24,12 @@ To run this project, perform the following steps:
 
 - Clone this repo
 - Run ```bundle```
-- Initialize a new order object:
+- Initialize new Order and Menu objects in the REPL of your choice, e.g. ```irb```:
 
 ```
 2.2.3 :002 > order = Order.new
- => #<Order:0x007f7fbb416968 @basket={}, @menu=#<Menu:0x007f7fbb416918 @items={"Hamburger"=>1, "Cheeseburger"=>1, "Pizza"=>2, "Hot Dog"=>1}>>  
+ => #<Order:0x007f7fbb416968 @basket={}, @menu=#<Menu:0x007f7fbb416918,
+    @items={"Hamburger"=>1, "Cheeseburger"=>1, "Pizza"=>2, "Hot Dog"=>1}>>  
 ```
 - Order some items
 
