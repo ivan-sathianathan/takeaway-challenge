@@ -19,4 +19,12 @@ describe Menu do
     expect(menu.show_dishes).to eq printed_menu
   end
 
+  it 'tells if a dish is on the menu' do
+    expect(menu.has_dish?(:chicken)).to be true
+  end
+
+  it 'tells if a dish is not on the menu' do
+    expect(menu.has_dish?(:fish)).to be false
+  end
+
 end
