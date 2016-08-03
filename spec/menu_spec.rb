@@ -1,14 +1,22 @@
 require 'menu'
 
 describe Menu do
-
-  it "should have a list of dishes" do
-    expect { (subject.items).to_not be_empty }
+  subject(:menu) { described_class.new(dishes) }
+  let (:dishes) do
+    {
+      chicken: 3.99,
+      beef: 2.99,
+      vegetarian: 1.99
+    }
   end
 
-  context "#read_menu" do
-    it "should print out menu" do
-      expect(subject.read_menu).to include("Hamburger")
-    end
+  it 'has a list of dishes with prices' do
+    expect(menu.dishes).to eq dishes
   end
+
+  it 'prints a list of dishes with prices' do
+    printed_menu = "Chicken: £3.99, Beef: £2.99, Vegetarian: £1.99"
+    expect(menu.show_dishes).to eq printed_menu
+  end
+
 end
