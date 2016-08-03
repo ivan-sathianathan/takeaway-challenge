@@ -3,7 +3,7 @@ require 'takeaway'
 describe Takeaway do
   subject(:takeaway) { described_class.new(menu: menu, order: order) }
   let (:menu) { double :menu, show_dishes: printed_menu }
-  let (:order) { double :order }
+  let (:order) { instance_double "Order", total: 12.49 }
   let (:printed_menu) { "Chicken, £2.50" }
   let (:dishes) { {chicken: 1, beef: 2} }
 
@@ -14,5 +14,11 @@ describe Takeaway do
   it 'can order some number of available dishes' do
     expect(order).to receive(:add).twice
     takeaway.place_order(dishes)
+  end
+
+  it 'knows the order total' do
+    allow(order).to receive(:add)
+    total = takeaway.place_order(dishes)
+    expect(total).to eq 12.49
   end
 end
