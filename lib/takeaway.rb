@@ -1,5 +1,5 @@
-require 'sms'
-require 'order'
+require_relative 'sms'
+require_relative 'order'
 
 class Takeaway
   def initialize(menu:, config:, order: nil, sms: nil)

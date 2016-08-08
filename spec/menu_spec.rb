@@ -10,25 +10,26 @@ describe Menu do
     }
   end
 
-  it 'has a list of dishes with prices' do
-    expect(menu.dishes).to eq dishes
+  context '#show_dishes' do
+    it 'prints a list of dishes with prices' do
+      printed_menu = "Chicken: £3.99, Beef: £2.99, Vegetarian: £1.99"
+      expect(menu.show_dishes).to eq printed_menu
+    end
   end
 
-  it 'prints a list of dishes with prices' do
-    printed_menu = "Chicken: £3.99, Beef: £2.99, Vegetarian: £1.99"
-    expect(menu.show_dishes).to eq printed_menu
+  context '#has_dish?' do
+    it 'tells if a dish is on the menu' do
+      expect(menu.has_dish?(:chicken)).to be true
+    end
+
+    it 'tells if a dish is not on the menu' do
+      expect(menu.has_dish?(:fish)).to be false
+    end
   end
 
-  it 'tells if a dish is on the menu' do
-    expect(menu.has_dish?(:chicken)).to be true
+  context '#price' do
+    it 'returns a price of a dish' do
+      expect(menu.price(:chicken)).to eq(dishes[:chicken])
+    end
   end
-
-  it 'tells if a dish is not on the menu' do
-    expect(menu.has_dish?(:fish)).to be false
-  end
-
-  it 'calculates a price' do
-    expect(menu.price(:chicken)).to eq(dishes[:chicken])
-  end
-
 end

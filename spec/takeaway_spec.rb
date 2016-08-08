@@ -12,22 +12,24 @@ describe Takeaway do
     allow(order).to receive(:add)
   end
 
-  it 'shows the menu with dishes and prices' do
-    expect(takeaway.print_menu).to eq(printed_menu)
+  context '#print_menu' do
+    it 'shows the menu with dishes and prices' do
+      expect(takeaway.print_menu).to eq(printed_menu)
+    end
   end
 
-  it 'can order some number of available dishes' do
-    expect(order).to receive(:add).twice
-    takeaway.place_order(dishes)
-  end
-
-  it 'knows the order total' do
-    total = takeaway.place_order(dishes)
-    expect(total).to eq 12.49
-  end
-
-  it 'sends an SMS when the order has been placed' do
-    expect(sms).to receive(:deliver)
-    takeaway.place_order(dishes)
+  context '#place_order' do
+    it 'can order some number of available dishes' do
+      expect(order).to receive(:add).twice
+      takeaway.place_order(dishes)
+    end
+    it 'knows the order total' do
+      total = takeaway.place_order(dishes)
+      expect(total).to eq 12.49
+    end
+    it 'sends an SMS when the order has been placed' do
+      expect(sms).to receive(:deliver)
+      takeaway.place_order(dishes)
+    end
   end
 end
