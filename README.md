@@ -27,106 +27,102 @@ To run this project, perform the following steps:
 2. Run ```bundle```
 3. Add the following environment variables to enable SMS delivery via Twilio API
 
-```
-TWILIO_NUMBER <- Your Twilio phone number
-PHONE_NUMBER  <- Your phone number
-ACCOUNT_SID   <- Your Twilio Account SID
-AUTH_TOKEN    <- Your Twilio Auth Token
-```
+  ```
+  TWILIO_NUMBER <- Your Twilio phone number
+  PHONE_NUMBER  <- Your phone number
+  ACCOUNT_SID   <- Your Twilio Account SID
+  AUTH_TOKEN    <- Your Twilio Auth Token
+  ```
 
-3. Create a menu hash and pass this as an initialization variable to the Menu class
+4. Create a menu hash and pass this as an initialization variable to the Menu class
 
-```
-menu_list =
-  {
-    "chicken" => 3.50,
-    "beef" => 2.50,
-    "vegetarian" => 1.50
-  }
+  ```
+  menu_list =
+    {
+      "chicken" => 3.50,
+      "beef" => 2.50,
+      "vegetarian" => 1.50
+    }
 
-menu = Menu.new(menu_list)
-```
+  menu = Menu.new(menu_list)
+  ```
 
 4. Create a config hash for SMS delivery that will be passed into the Takeaway class on initialization.
 
-```
-config =
-  {
-    account_sid: ENV["ACCOUNT_SID"],
-    auth_token: ENV["AUTH_TOKEN"],
-    from: ENV["TWILIO_NUMBER"],
-    to: ENV["PHONE_NUMBER"],
-    body: "Thank you! Your order will be delivered before %s"
-  }
-```
+  ```
+  config =
+    {
+      account_sid: ENV["ACCOUNT_SID"],
+      auth_token: ENV["AUTH_TOKEN"],
+      from: ENV["TWILIO_NUMBER"],
+      to: ENV["PHONE_NUMBER"],
+      body: "Thank you! Your order will be delivered before %s"
+    }
+  ```
 
 5. Initialize Takeaway class with menu and config
-```
-takeaway = Takeaway.new(menu: menu, config: config)
- ```
+  ```
+  takeaway = Takeaway.new(menu: menu, config: config)
+   ```
 
 6. Check what's on the menu
-```
-takeaway.print_menu
- => "Chicken: £3.50, Beef: £2.50, Vegetarian: £1.50"
-```
+  ```
+  takeaway.print_menu
+   => "Chicken: £3.50, Beef: £2.50, Vegetarian: £1.50"
+  ```
 
 7. Initialize a new order object and add some dishes to your order
-```
-order = Order.new(menu)
+  ```
+  order = Order.new(menu)
 
-order.add("chicken",2)
- => "You have added 2 chicken dishes to your order"
-order.add("beef",3)
- => "You have added 3 beef dishes to your order"
-```
+  order.add("chicken",2)
+   => "You have added 2 chicken dishes to your order"
+  order.add("beef",3)
+   => "You have added 3 beef dishes to your order"
+  ```
 
 8. Confirm the value of the order
-```
-order.total
- => "Your order total is £14.50"
-```
+  ```
+  order.total
+   => "Your order total is £14.50"
+  ```
 
 9. Place order, at which point you should receive an SMS confirming delivery time
 
-```
-takeaway.place_order(order.dishes)
-```
+  ```
+  takeaway.place_order(order.dishes)
+  ```
 
 
 More documentation on the behaviour of each class and their methods can be found by running ```rspec```
 
-```
-Menu
-  #show_dishes
-    prints a list of dishes with prices
-  #has_dish?
-    tells if a dish is on the menu
-    tells if a dish is not on the menu
-  #price
-    returns a price of a dish
+  ```
+  Menu
+    #show_dishes
+      prints a list of dishes with prices
+    #has_dish?
+      tells if a dish is on the menu
+      tells if a dish is not on the menu
+    #price
+      returns a price of a dish
 
-Order
-  #add
-    adds dishes from the menu to the order
-    does not allow items to be added to order that are not on the menu
-    prints dishes added to order
-  #total
-    prints the total for the order
+  Order
+    #add
+      adds dishes from the menu to the order
+      does not allow items to be added to order that are not on the menu
+      prints dishes added to order
+    #total
+      prints the total for the order
 
-SMS
-  #deliver
-    delivers SMS with the estimated time
+  SMS
+    #deliver
+      delivers SMS with the estimated time
 
-Takeaway
-  #print_menu
-    shows the menu with dishes and prices
-  #place_order
-    can order some number of available dishes
-    knows the order total
-    sends an SMS when the order has been placed
-```
-
-
-[![Build Status](https://travis-ci.org/makersacademy/takeaway-challenge.svg?branch=master)](https://travis-ci.org/makersacademy/takeaway-challenge)
-[![Coverage Status](https://coveralls.io/repos/github/ivan-sathianathan/takeaway-challenge/badge.svg?branch=master)](https://coveralls.io/github/ivan-sathianathan/takeaway-challenge?branch=master)
+  Takeaway
+    #print_menu
+      shows the menu with dishes and prices
+    #place_order
+      can order some number of available dishes
+      knows the order total
+      sends an SMS when the order has been placed
+  ```
