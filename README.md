@@ -34,72 +34,67 @@ ACCOUNT_SID   <- Your Twilio Account SID
 AUTH_TOKEN    <- Your Twilio Auth Token
 ```
 
-3. Create a new Menu object in REPL of your choice, e.g. ```irb```:
+3. Create a menu hash and pass this as an initialization variable to the Menu class
 
 ```
-2.2.3 :001 > require './lib/menu'
- => true
-2.2.3 :002 > menu_list = {
-2.2.3 :003 >     "chicken" => 3.50,
-2.2.3 :004 >     "beef" => 2.50,
-2.2.3 :005 >     "vegetarian" => 1.50
-2.2.3 :006?>   }
- => {"chicken"=>3.5, "beef"=>2.5, "vegetarian"=>1.5}
-2.2.3 :007 > menu = Menu.new(menu_list)
- => #<Menu:0x007fda520f6750 @dishes={"chicken"=>3.5, "beef"=>2.5, "vegetarian"=>1.5}>
+menu_list =
+  {
+    "chicken" => 3.50,
+    "beef" => 2.50,
+    "vegetarian" => 1.50
+  }
+
+menu = Menu.new(menu_list)
 ```
 
 4. Create a config hash for SMS delivery that will be passed into the Takeaway class on initialization.
 
 ```
-2.2.3 :008 > config = {
-2.2.3 :009 >     account_sid: ENV["ACCOUNT_SID"],
-2.2.3 :010 >     auth_token: ENV["AUTH_TOKEN"],
-2.2.3 :011 >     from: ENV["TWILIO_NUMBER"],
-2.2.3 :012 >     to: ENV["PHONE_NUMBER"],
-2.2.3 :013 >     body: "Thank you! Your order will be delivered before %s"
-2.2.3 :014?>   }
- => {:account_sid=>"ACe25f0b72ea6dff0b58c6566185f8142b", :auth_token=>"fa53e1d1d611d455a6f157ee94372579", :from=>"+16474926426", :to=>"+16479909551", :body=>"Thank you! Your order will be delivered before %s"}
+config =
+  {
+    account_sid: ENV["ACCOUNT_SID"],
+    auth_token: ENV["AUTH_TOKEN"],
+    from: ENV["TWILIO_NUMBER"],
+    to: ENV["PHONE_NUMBER"],
+    body: "Thank you! Your order will be delivered before %s"
+  }
 ```
 
 5. Initialize Takeaway class with menu and config
 ```
-2.2.3 :015 > require './lib/takeaway'
- => true
-2.2.3 :016 > takeaway = Takeaway.new(menu: menu, config: config)
- => #<Takeaway:0x007f94f4ace410 @menu=#<Menu:0x007f94f4111f58 @dishes={"chicken"=>3.5, "beef"=>2.5, "vegetarian"=>1.5}>, @order=#<Order:0x007f94f4ace398 @dishes={}, @menu=#<Menu:0x007f94f4111f58 @dishes={"chicken"=>3.5, "beef"=>2.5, "vegetarian"=>1.5}>>, @sms=#<SMS:0x007f94f4ace320 @client=<Twilio::REST::Client @account_sid=ACe25f0b72ea6dff0b58c6566185f8142b>, @config={:account_sid=>"ACe25f0b72ea6dff0b58c6566185f8142b", :auth_token=>"fa53e1d1d611d455a6f157ee94372579", :from=>"+16474926426", :to=>"+16479909551", :body=>"Thank you! Your order will be delivered before %s"}>>
+takeaway = Takeaway.new(menu: menu, config: config)
  ```
 
 6. Check what's on the menu
 ```
-2.2.3 :017 > takeaway.print_menu
+takeaway.print_menu
  => "Chicken: £3.50, Beef: £2.50, Vegetarian: £1.50"
 ```
 
 7. Initialize a new order object and add some dishes to your order
 ```
-2.2.3 :018 > order = Order.new(menu)
- => #<Order:0x007f94f4a6eb28 @dishes={}, @menu=#<Menu:0x007f94f4111f58 @dishes={"chicken"=>3.5, "beef"=>2.5, "vegetarian"=>1.5}>>
- 2.2.3 :019 > order.add("chicken",2)
+order = Order.new(menu)
+
+order.add("chicken",2)
  => "You have added 2 chicken dishes to your order"
-2.2.3 :020 > order.add("beef",3)
+order.add("beef",3)
  => "You have added 3 beef dishes to your order"
- ```
+```
 
 8. Confirm the value of the order
 ```
-2.2.3 :021 > order.total
+order.total
  => "Your order total is £14.50"
- ```
+```
 
 9. Place order, at which point you should receive an SMS confirming delivery time
 
 ```
-2.2.3 :025 > takeaway.place_order(order.dishes)
+takeaway.place_order(order.dishes)
 ```
 
 
-More documentation on the behaviour of each class can be found by running ```rspec```
+More documentation on the behaviour of each class and their methods can be found by running ```rspec```
 
 ```
 Menu
